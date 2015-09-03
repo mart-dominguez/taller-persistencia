@@ -25,4 +25,9 @@ public class CursoEspecifico extends Curso {
     public void setCreditosRequeridos(int creditosRequeridos) {
         this.creditosRequeridos = creditosRequeridos;
     }
+
+    @Override
+    public String tipoCurso() {
+        return "E";
+    }
 }

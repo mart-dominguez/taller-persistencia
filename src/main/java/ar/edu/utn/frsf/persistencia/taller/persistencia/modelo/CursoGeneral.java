@@ -25,4 +25,9 @@ public class CursoGeneral extends Curso {
     public void setCupoMaximo(int cupoMaximo) {
         this.cupoMaximo = cupoMaximo;
     }
+    
+    @Override
+    public String tipoCurso() {
+        return "E";
+    }
 }

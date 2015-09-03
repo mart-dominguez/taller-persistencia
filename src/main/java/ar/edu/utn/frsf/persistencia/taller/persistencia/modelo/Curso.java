@@ -18,6 +18,8 @@ public abstract class Curso {
     private Docente docente;
     private List<Alumno> alumnos;
 
+    public abstract String tipoCurso();
+    
     /**
      * @return the id
      */
