@@ -2,7 +2,7 @@
 Taller de persistencia con java
 
 Presentaciones de cada Taller
-[Taller 01 - JDBC](taller-persistencia/tree/master/src/main/resources/ppt/Taller01-JDBC.pdf)
+[Taller 01 - JDBC](blob/master/src/main/resources/ppt/Taller01-JDBC.pdf)
 
 Requisitos para instalar el proyecto:
 * Java JDK (preferentemente Java8)
