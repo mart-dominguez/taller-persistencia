@@ -13,13 +13,8 @@ import java.util.List;
  * @author mdominguez
  */
 public interface AlumnoDao {
-    public void set(Alumno a);
-    public Alumno get();
-    public void crear();
     public void crear(Alumno a);
-    public void actualizar();
     public void actualizar(Alumno a);
-    public void borrar();
     public void borrar(Alumno a);
     public Alumno buscarPorId(Integer id);
     public List<Alumno> buscarTodos();

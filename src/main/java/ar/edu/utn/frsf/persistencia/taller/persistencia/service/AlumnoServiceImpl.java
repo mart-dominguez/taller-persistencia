@@ -15,12 +15,11 @@ import java.util.List;
  * @author mdominguez
  */
 public class AlumnoServiceImpl implements AlumnoService {
-    private AlumnoDao dao = new AlumnoDaoJDBC();
+    private AlumnoDao dao = AlumnoDaoJDBC.get();
 
     @Override
     public void nuevoAlumno(Alumno alu) {
-        dao.set(alu);
-        dao.crear();
+        dao.crear(alu);
     }
 
     @Override

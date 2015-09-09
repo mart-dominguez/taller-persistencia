@@ -26,6 +26,10 @@ public class App {
         alu.setNombre("Jesse Pinkman");
         alu.setNroLegajo(123456);
         aluSrv.nuevoAlumno(alu);
+        Alumno alu2 = new Alumno();
+        alu2.setNombre("Walter White");
+        alu.setNroLegajo(987654);
+        aluSrv.nuevoAlumno(alu2);
         List<Alumno> listaAlumnos = aluSrv.listaAlumnos();
         for(Alumno unAlumno : listaAlumnos){
             System.out.println(unAlumno.getId()+" : "+unAlumno.getNombre()+" : "+unAlumno.getNroLegajo());

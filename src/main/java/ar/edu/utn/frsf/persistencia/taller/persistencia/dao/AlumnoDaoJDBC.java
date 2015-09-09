@@ -8,6 +8,7 @@ package ar.edu.utn.frsf.persistencia.taller.persistencia.dao;
 import ar.edu.utn.frsf.persistencia.taller.persistencia.dao.util.DBConnection;
 import ar.edu.utn.frsf.persistencia.taller.persistencia.modelo.Alumno;
 import java.sql.Connection;
+import java.sql.DatabaseMetaData;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -22,8 +23,13 @@ import java.util.logging.Logger;
  */
 public class AlumnoDaoJDBC implements AlumnoDao{
 
-    private Alumno alumnoActual;
-    
+    private boolean estructuraCreada; 
+    private static final String _CREAR_TABLA = "create table ALUMNO (" +
+        "    ID bigint auto_increment, " +
+        "    NOMBRE varchar(80)," +
+        "    NRO_LEGAJO int," +
+        "    PRIMARY KEY (ID)" +
+        ");";
     /* sentencias sql para reuso */
     private static final String _TABLE_NAME = "ALUMNO"; 
     private static final String _SQL_INSERT_ALUMNO = "INSERT INTO "+_TABLE_NAME+" (NOMBRE,NRO_LEGAJO) VALUES(?,?)";
@@ -31,20 +37,55 @@ public class AlumnoDaoJDBC implements AlumnoDao{
     private static final String _SQL_UPDATE_ALUMNO = "UPDATE "+_TABLE_NAME+" set NOMBRE =?,NRO_LEGAJO=? WHERE ID =?";
     private static final String _SQL_FIND_BY_ID_ALUMNO = "SELECT * FROM "+_TABLE_NAME+" WHERE ID = ?";
     private static final String _SQL_FIND_ALL_ALUMNO = "SELECT * FROM "+_TABLE_NAME;
-
-    @Override
-    public void set(Alumno a) {
-        this.alumnoActual=a;
+    
+    private static AlumnoDaoJDBC _INSTANCIA=null;
+  
+    private AlumnoDaoJDBC(){
+        estructuraCreada=false;
+    }
+            
+    public static AlumnoDaoJDBC get(){
+        if(_INSTANCIA==null){
+            _INSTANCIA = new AlumnoDaoJDBC();
+            _INSTANCIA.crearEstructura();
+        }
+        return _INSTANCIA;
     }
 
-    @Override
-    public Alumno get() {
-        return this.alumnoActual;                
-    }
+    public void crearEstructura(){
+        
+         Connection conn = null;
+        try {            
+             conn = DBConnection.get();            
+            DatabaseMetaData meta = conn.getMetaData();
+            ResultSet res = meta.getTables(null, null, _TABLE_NAME,     new String[] {"TABLE"});
+            while (res.next()) {
+                estructuraCreada=true;
+                System.out.println(
+        "   "+res.getString("TABLE_CAT") 
+       + ", "+res.getString("TABLE_SCHEM")
+       + ", "+res.getString("TABLE_NAME")
+       + ", "+res.getString("TABLE_TYPE")
+       + ", "+res.getString("REMARKS")); 
+        }
+             if(!estructuraCreada){
 
-    @Override
-    public void crear() {
-        this.crear(this.alumnoActual);
+              PreparedStatement ps = conn.prepareStatement(_CREAR_TABLA);
+                ps.executeUpdate();
+                       ps.close();
+
+             }       
+        } catch (SQLException ex) {
+            Logger.getLogger(AlumnoDaoJDBC.class.getName()).log(Level.SEVERE, null, ex);
+        }finally{
+            //no olvidar nunca cerrar todo!!!
+            if(conn!=null)try {
+                conn.close();
+            } catch (SQLException ex) {
+                Logger.getLogger(AlumnoDaoJDBC.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            estructuraCreada=true;
+        }
     }
 
     @Override
@@ -72,11 +113,6 @@ public class AlumnoDaoJDBC implements AlumnoDao{
     }
 
     @Override
-    public void actualizar() {
-        this.actualizar(alumnoActual);
-    }
-
-    @Override
     public void actualizar(Alumno a) {
         Connection conn = null;
         try {
@@ -96,11 +132,6 @@ public class AlumnoDaoJDBC implements AlumnoDao{
                 Logger.getLogger(AlumnoDaoJDBC.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
-    }
-
-    @Override
-    public void borrar() {
-        this.borrar(alumnoActual);
     }
 
     @Override
@@ -167,7 +198,7 @@ public class AlumnoDaoJDBC implements AlumnoDao{
                 tmp.setNroLegajo(rs.getInt("NRO_LEGAJO"));
                 // PENDIENTE a RESOLVER 
                 // ¿Como retornar la lista de cursos a los que se anotó?????
-                resultado.add(alumnoActual);
+                resultado.add(tmp);
             }
         } catch (SQLException ex) {
             Logger.getLogger(AlumnoDaoJDBC.class.getName()).log(Level.SEVERE, null, ex);

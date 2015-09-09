@@ -13,6 +13,7 @@ import ar.edu.utn.frsf.persistencia.taller.persistencia.modelo.CursoGeneral;
 import ar.edu.utn.frsf.persistencia.taller.persistencia.modelo.Docente;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.logging.Level;
@@ -102,6 +103,13 @@ public class CursoDaoJDBC implements CursoDao{
             ps.setString(5, a.tipoCurso());
             ps.setInt(6, a.getId());
             ps.executeUpdate();
+            ResultSet generatedKeys = ps.getGeneratedKeys() ;          
+            if (generatedKeys.next()) {
+                a.setId(generatedKeys.getInt(1));
+            } else {
+                throw new SQLException("No se pudo obtener un ID.");
+            }
+            generatedKeys.close();
             //no olvidar nunca cerrar todo!!!
             ps.close();
         } catch (SQLException ex) {

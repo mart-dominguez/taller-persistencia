@@ -28,6 +28,6 @@ public class CursoGeneral extends Curso {
     
     @Override
     public String tipoCurso() {
-        return "E";
+        return "G";
     }
 }
