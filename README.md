@@ -1,10 +1,10 @@
 # taller-persistencia
 Taller de persistencia con java
 
-Presentaciones de cada Taller
-[Taller 01 - JDBC](blob/master/src/main/resources/ppt/Taller01-JDBC.pdf)
+##Presentaciones de cada Taller##
+[Taller 01 - JDBC](src/main/resources/ppt/Taller01-JDBC.pdf)
 
-Requisitos para instalar el proyecto:
+###Requisitos para instalar el proyecto:###
 * Java JDK (preferentemente Java8)
 * Con Netbeans como IDE
   * IDE Netbeans 8.02
