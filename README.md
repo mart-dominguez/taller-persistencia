@@ -17,3 +17,6 @@ Taller de persistencia con java
   * Descomprimirlo en una carpeta y luego en eclipse importar --> Maven --> Existing maven project
 * Con Eclipse **Sin Maven**
   * Descargar el archivo  https://github.com/mart-dominguez/taller-persistencia/archive/master.zip descomprimirlo y copiar en el directorio "src" el contenido de la carpeta "src"
+
+###Bases de Datos###
+* H2 http://www.h2database.com/
