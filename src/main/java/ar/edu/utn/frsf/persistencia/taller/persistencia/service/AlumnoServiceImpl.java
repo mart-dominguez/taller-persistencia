@@ -7,6 +7,7 @@ package ar.edu.utn.frsf.persistencia.taller.persistencia.service;
 
 import ar.edu.utn.frsf.persistencia.taller.persistencia.dao.AlumnoDao;
 import ar.edu.utn.frsf.persistencia.taller.persistencia.dao.AlumnoDaoJDBC;
+import ar.edu.utn.frsf.persistencia.taller.persistencia.dao.AlumnoDaoJPA;
 import ar.edu.utn.frsf.persistencia.taller.persistencia.modelo.Alumno;
 import java.util.List;
 
@@ -15,7 +16,8 @@ import java.util.List;
  * @author mdominguez
  */
 public class AlumnoServiceImpl implements AlumnoService {
-    private AlumnoDao dao = AlumnoDaoJDBC.get();
+  //  private AlumnoDao dao = AlumnoDaoJDBC.get();
+    private AlumnoDao dao = new AlumnoDaoJPA();
 
     @Override
     public void nuevoAlumno(Alumno alu) {
