@@ -6,16 +6,39 @@
 package ar.edu.utn.frsf.persistencia.taller.persistencia.modelo;
 
 import java.util.List;
+import javax.persistence.DiscriminatorColumn;
+import javax.persistence.DiscriminatorType;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 
 /**
  *
  * @author mdominguez
  */
+@Entity
+@Table(name = "TALLER_CURSO")
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+@DiscriminatorColumn(name = "TIPO_CURSO",discriminatorType = DiscriminatorType.STRING)
 public abstract class Curso {
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
     private String nombre;
     private int creditos;
+    @ManyToOne
+    @JoinColumn(name = "ID_DOCENTE")
     private Docente docente;
+    @ManyToMany
+    @JoinTable(name = "TALLER_ALUMNO_CURSO", joinColumns = @JoinColumn(name = "ID_CURSO"),inverseJoinColumns = @JoinColumn(name = "ID_ALUMNO"))
     private List<Alumno> alumnos;
 
     public abstract String tipoCurso();

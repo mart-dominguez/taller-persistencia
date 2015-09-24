@@ -26,13 +26,17 @@ public class AlumnoServiceImpl implements AlumnoService {
 
     @Override
     public Integer creditosObtenidos(Alumno alu) {
-        // TODO
+        // TODO taller 4
         return 0;
     }
 
     @Override
     public List<Alumno> listaAlumnos() {
         return dao.buscarTodos();
+    }
+    
+    public Integer cantidadCreditos(Alumno a){
+        return dao.cantidadCreditos(a.getId());
     }
         
 

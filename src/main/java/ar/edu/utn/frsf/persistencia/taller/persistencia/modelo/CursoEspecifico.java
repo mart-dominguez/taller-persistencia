@@ -5,10 +5,13 @@
  */
 package ar.edu.utn.frsf.persistencia.taller.persistencia.modelo;
 
+import javax.persistence.DiscriminatorValue;
+
 /**
  *
  * @author mdominguez
  */
+@DiscriminatorValue(value = "E")
 public class CursoEspecifico extends Curso {
     private int creditosRequeridos;
 

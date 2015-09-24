@@ -19,5 +19,6 @@ public interface AlumnoDao {
     public Alumno buscarPorId(Integer id);
     public List<Alumno> buscarTodos();
     public List<Alumno> buscarPorNombre(String nombre);
+    public Integer cantidadCreditos(Integer idAlumno);
     
 }

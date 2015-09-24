@@ -5,10 +5,13 @@
  */
 package ar.edu.utn.frsf.persistencia.taller.persistencia.modelo;
 
+import javax.persistence.DiscriminatorValue;
+
 /**
  *
  * @author mdominguez
  */
+@DiscriminatorValue(value = "G")
 public class CursoGeneral extends Curso {
     private int cupoMaximo;
 

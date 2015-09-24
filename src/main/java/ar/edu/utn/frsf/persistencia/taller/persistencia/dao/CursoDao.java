@@ -28,4 +28,6 @@ public interface CursoDao {
     public List<Curso > buscarPorNombre(String nombre);
     public Curso registrarDocente(Curso c, Docente d);
     public Curso inscribirAlumno(Curso c, Alumno d);
+    public Integer cantidadInscriptos(Curso c);
+
 }

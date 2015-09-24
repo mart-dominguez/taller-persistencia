@@ -9,9 +9,8 @@ import ar.edu.utn.frsf.persistencia.taller.persistencia.dao.util.MiEntityManager
 import ar.edu.utn.frsf.persistencia.taller.persistencia.modelo.Alumno;
 import java.util.List;
 import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
-import javax.persistence.Persistence;
+import javax.persistence.Query;
 
 /**
  *
@@ -23,7 +22,6 @@ public class AlumnoDaoJPA implements AlumnoDao{
     public void crear(Alumno a) {
         EntityManager em = MiEntityManager.get();
         EntityTransaction tx = em.getTransaction();
-        //em.getTransaction().begin();
         tx.begin();
         em.persist(a);
         tx.commit();
@@ -32,23 +30,36 @@ public class AlumnoDaoJPA implements AlumnoDao{
 
     @Override
     public void actualizar(Alumno a) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        EntityManager em = MiEntityManager.get();
+        EntityTransaction tx = em.getTransaction();
+        tx.begin();
+        em.merge(a);
+        tx.commit();
+        em.close();
     }
 
     @Override
     public void borrar(Alumno a) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        EntityManager em = MiEntityManager.get();
+        EntityTransaction tx = em.getTransaction();
+        tx.begin();
+        Alumno aBorrar = em.find(Alumno.class, a.getId());
+        em.remove(aBorrar);
+        tx.commit();
+        em.close();
     }
 
     @Override
     public Alumno buscarPorId(Integer id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        EntityManager em = MiEntityManager.get();
+        Alumno alu = em.find(Alumno.class, id);
+        em.close();
+        return alu;
     }
 
     @Override
     public List<Alumno> buscarTodos() {
         EntityManager em = MiEntityManager.get();
-        //em.getTransaction().begin();
         List<Alumno> result = em.createQuery("SELECT a FROM Alumno a").getResultList();
         em.close();
         return result;
@@ -57,6 +68,16 @@ public class AlumnoDaoJPA implements AlumnoDao{
     @Override
     public List<Alumno> buscarPorNombre(String nombre) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public Integer cantidadCreditos(Integer idAlumno) {
+        EntityManager em = MiEntityManager.get();
+        Query q= em.createQuery("");
+        q.setParameter("P_ID_ALUMNO", idAlumno);
+        Integer cantidad = (Integer) q.getSingleResult();
+        em.close();
+        return cantidad;
     }
     
 }

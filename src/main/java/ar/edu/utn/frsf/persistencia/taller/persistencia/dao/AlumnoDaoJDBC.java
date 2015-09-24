@@ -217,5 +217,10 @@ public class AlumnoDaoJDBC implements AlumnoDao{
     public List<Alumno> buscarPorNombre(String nombre) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+
+    @Override
+    public Integer cantidadCreditos(Integer idAlumno) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
     
 }

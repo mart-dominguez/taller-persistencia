@@ -7,16 +7,32 @@ package ar.edu.utn.frsf.persistencia.taller.persistencia.modelo;
 
 import java.util.Date;
 import java.util.List;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 /**
  *
  * @author mdominguez
  */
+@Entity
+@Table(name = "TALLER_DOCENTE")
 public class Docente {
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
     private String nombre;
     private Double salario;
+    @Column(name="FECHA_INGRESO")
+    @Temporal(TemporalType.DATE)
     private Date fechaContracion;
+    @OneToMany(mappedBy = "docente")
     private List<Curso> cursosDictados;
 
     /**

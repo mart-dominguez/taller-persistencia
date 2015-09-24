@@ -5,21 +5,26 @@
  */
 package ar.edu.utn.frsf.persistencia.taller.persistencia.service;
 
-import ar.edu.utn.frsf.persistencia.taller.persistencia.modelo.Alumno;
 import ar.edu.utn.frsf.persistencia.taller.persistencia.modelo.Curso;
 import ar.edu.utn.frsf.persistencia.taller.persistencia.modelo.Docente;
+import java.util.List;
 
 /**
  *
  * @author mdominguez
  */
-public interface CursoService {
+public interface DocenteService {
+ 
+    /**
+     * Graba un alumno en la base de datos.
+     * @param alu 
+     */
+    public void nuevoDocente(Docente doc);
     
-    public void nuevoCurso(Curso curso);
-    public void inscribirAlumno(Curso curso,Alumno alumno);
-    public void cargarInscriptos(Curso curso);
-    public void actualizarCurso(Curso curso);
-    public void asignarDocente(Curso curso,Docente doc);
-
-
+    
+    /**
+     * Lista todos los cursos que el docente dicta y que tienen cupo disponible
+     * @return 
+     */
+    public List<Curso> listaCursosConCupo();
 }

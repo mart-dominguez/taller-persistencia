@@ -175,4 +175,9 @@ public class CursoDaoJDBC implements CursoDao{
     public Curso inscribirAlumno(Curso c, Alumno d) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+
+    @Override
+    public Integer cantidadInscriptos(Curso c) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }
